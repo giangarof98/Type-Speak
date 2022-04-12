@@ -7,7 +7,7 @@ const rate = document.getElementById('rate');
 const rateValue = document.getElementById('rate-value');
 const pitch = document.getElementById('pitch');
 const pitchValue = document.getElementById('pitch-value');
-
+const body = document.querySelector('body')
 //Array of voices
 let voices = [];
 
@@ -37,11 +37,16 @@ const speak = () => {
         return
     }
     if(textInput.value !== ''){
+        //add animation
+        body.style.background = '#141414 url(wave.gif)';
+        body.style.backgroundRepeat = 'repeat-x';
+        body.style.backgroundSize = '100% 100%'
         //Get text
         const speakText = new SpeechSynthesisUtterance(textInput.value);
         //Speak end
         speakText.onend = e => {
             console.log('done speaking')
+            body.style = 'none'
         }
         //if error
         speakText.onerror = e => {
